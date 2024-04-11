@@ -10,26 +10,7 @@ if (!$conn) {
     die("Conexión fallida: " . mysql_error());
 }
 
-// Seleccionar la base de datos
-$db_selected = mysql_select_db($dbname, $conn);
-if (!$db_selected) {
-    die ('No se pudo seleccionar la base de datos: ' . mysql_error());
-}
 
-// Si se envió el formulario de agregar
-if (isset($_POST['submit'])) {
-    $nombre_completo = mysql_real_escape_string($_POST['nombre_completo']);
-    $correo = mysql_real_escape_string($_POST['correo']);
-    $comentario = mysql_real_escape_string($_POST['comentario']);
-
-    // Insertar nuevo registro
-    $sql = "INSERT INTO usuarios (nombre_completo, correo, comentario)
-            VALUES ('$nombre_completo', '$correo', '$comentario')";
-    $result = mysql_query($sql);
-    if (!$result) {
-        die('Error al insertar registro: ' . mysql_error());
-    }
-}
 
 
 
