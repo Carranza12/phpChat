@@ -11,6 +11,21 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nombre_completo = $_POST['nombre_completo'];
+    $correo = $_POST['correo'];
+    $comentario = $_POST['comentario'];
+
+    // Insertar nuevo registro
+    $sql = "INSERT INTO usuarios (nombre_completo, correo, comentario)
+            VALUES ('$nombre_completo', '$correo', '$comentario')";
+    if ($conn->query($sql) === TRUE) {
+        echo "<script>alert('Comentario agregado correctamente');</script>";
+    } else {
+        echo "Error al insertar registro: " . $conn->error;
+    }
+}
+
 
 ?>
 
