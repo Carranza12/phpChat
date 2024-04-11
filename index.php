@@ -5,12 +5,6 @@ $password = "12323bueno";
 $dbname = "prueba";
 
 
-$conn = mysql_connect($servername, $username, $password);
-if (!$conn) {
-    die("Conexión fallida: " . mysql_error());
-}
-
-
 
 
 
