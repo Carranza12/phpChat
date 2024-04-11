@@ -34,12 +34,47 @@ $result = $conn->query($sql);
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CRUD de Usuarios</title>
+    <title>CHAT de Usuarios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow-y: scroll;
+            height: 400px; /* Altura fija para mostrar el historial de mensajes */
+        }
+
+        .message {
+            margin-bottom: 10px;
+        }
+
+        .message .user {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .message .time {
+            font-size: 0.8em;
+            color: #777;
+        }
+
+        .message .content {
+            background-color: #f1f0f0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
     <h1>CRUD de Usuarios</h1>
 
-    <h2>Agregar Usuario</h2>
+    <h2>Agregar un comentario</h2>
     <form method="post" action="">
         <label for="nombre_completo">Nombre Completo:</label><br>
         <input type="text" id="nombre_completo" name="nombre_completo" required><br><br>
@@ -50,28 +85,23 @@ $result = $conn->query($sql);
         <input type="submit" name="submit" value="Agregar">
     </form>
 
-    <h2>Usuarios</h2>
-    <table border="1">
-        <tr>
-            <th>Nombre Completo</th>
-            <th>Correo</th>
-            <th>Comentario</th>
-        </tr>
+    <div class="chat-container">
+        <h2>Chat</h2>
         <?php
-        // Mostrar registros
+
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>".$row['nombre_completo']."</td>";
-                echo "<td>".$row['correo']."</td>";
-                echo "<td>".$row['comentario']."</td>";
-                echo "</tr>";
+                echo '<div class="message">';
+                echo '<span class="user">' . $row['nombre_completo'] . '</span>';
+                echo '<span class="time">' . $row['correo'] . '</span>';
+                echo '<p class="content">' . $row['comentario'] . '</p>';
+                echo '</div>';
             }
         } else {
-            echo "<tr><td colspan='3'>No hay comentarios aún</td></tr>";
+            echo "<p>No hay mensajes.</p>";
         }
         ?>
-    </table>
+    </div>
 </body>
 </html>
 
