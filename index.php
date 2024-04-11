@@ -56,18 +56,19 @@ $result = $conn->query($sql);
             <th>Nombre Completo</th>
             <th>Correo</th>
             <th>Comentario</th>
-            <th>Acción</th>
         </tr>
         <?php
         // Mostrar registros
-        $sql = "SELECT * FROM usuarios";
-        $result = mysql_query($sql);
-        while ($row = mysql_fetch_assoc($result)) {
-            echo "<tr>";
-            echo "<td>".$row['nombre_completo']."</td>";
-            echo "<td>".$row['correo']."</td>";
-            echo "<td>".$row['comentario']."</td>";
-            echo "</tr>";
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>".$row['nombre_completo']."</td>";
+                echo "<td>".$row['correo']."</td>";
+                echo "<td>".$row['comentario']."</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='3'>No hay comentarios aún</td></tr>";
         }
         ?>
     </table>
@@ -75,6 +76,5 @@ $result = $conn->query($sql);
 </html>
 
 <?php
-// Cerrar conexión
-mysql_close($conn);
+$conn->close();
 ?>
