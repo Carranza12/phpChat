@@ -4,7 +4,7 @@ $username = "root";
 $password = "12323bueno";
 $dbname = "prueba";
 
-// Crear conexión
+
 $conn = mysql_connect($servername, $username, $password);
 if (!$conn) {
     die("Conexión fallida: " . mysql_error());
@@ -31,17 +31,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
-// Si se envió el formulario de eliminar
-if (isset($_POST['delete'])) {
-    $id = $_POST['delete_id'];
 
-    // Eliminar registro
-    $sql = "DELETE FROM usuarios WHERE id=$id";
-    $result = mysql_query($sql);
-    if (!$result) {
-        die('Error al eliminar registro: ' . mysql_error());
-    }
-}
 
 ?>
 
@@ -81,12 +71,6 @@ if (isset($_POST['delete'])) {
             echo "<td>".$row['nombre_completo']."</td>";
             echo "<td>".$row['correo']."</td>";
             echo "<td>".$row['comentario']."</td>";
-            echo "<td>";
-            echo "<form method='post' action=''>";
-            echo "<input type='hidden' name='delete_id' value='".$row['id']."'>";
-            echo "<input type='submit' name='delete' value='Eliminar'>";
-            echo "</form>";
-            echo "</td>";
             echo "</tr>";
         }
         ?>
