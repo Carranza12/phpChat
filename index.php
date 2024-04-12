@@ -72,7 +72,7 @@ $result = $conn->query($sql);
     </style>
 </head>
 <body>
-    <h1>CRUD de Usuarios</h1>
+    <h1>Chat de Usuarios</h1>
 
     <h2>Agregar un comentario</h2>
     <form method="post" action="">
